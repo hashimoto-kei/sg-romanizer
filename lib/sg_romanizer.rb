@@ -2,20 +2,18 @@ class SgRomanizer
   ROMAN_SYMBOLS = ["I", "V", "X", "L", "C", "D", "M"]
 
   def romanize(arabic)
-    digits = to_digits(arabic)
     ret = ''
+    digits = to_digits(arabic)
     digits.each_with_index{|digit, i|
       place = digits.length - i
       ret << to_roman(place, digit)
     }
-    puts ret
     return ret
   end
 
   def to_digits(arabic)
-    string = arabic.to_s
     ret = []
-    for char in string.chars do
+    for char in arabic.to_s.chars do
       digit = char.to_i
       ret << digit
     end
