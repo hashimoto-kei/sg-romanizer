@@ -11,6 +11,14 @@ class SgRomanizer
     return ret
   end
 
+  def deromanize(roman)
+    for arabic in 1..3999 do
+      if roman == romanize(arabic)
+        return arabic
+      end
+    end
+  end
+
   def to_digits(arabic)
     ret = []
     for char in arabic.to_s.chars do
@@ -36,14 +44,6 @@ class SgRomanizer
     base10 = ROMAN_SYMBOLS[unit_index + 2]
     if digit == 9
       return unit + base10
-    end
-  end
-
-  def deromanize(roman)
-    for arabic in 1..3999 do
-      if roman == romanize(arabic)
-        return arabic
-      end
     end
   end
 end
