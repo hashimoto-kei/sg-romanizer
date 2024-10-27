@@ -21,9 +21,8 @@ class SgRomanizer
 
   private def to_digits(arabic)
     ret = []
-    for char in arabic.to_s.chars do
-      digit = char.to_i
-      ret << digit
+    for digit in arabic.to_s.chars do
+      ret << digit.to_i
     end
     return ret
   end
