@@ -1,22 +1,51 @@
-require_relative './ideromanizer'
-require_relative './iromanizer'
-require_relative './deromanizer_impl_simple'
-require_relative './romanizer_impl'
-
 class SgRomanizer
-  include IRomanizer
-  include IDeromanizer
-
-  def initialize()
-    @romanizer_impl = RomanizerImpl.new
-    @deromanizer_impl = DeromanizerImplSimple.new
-  end
+  ROMAN_SYMBOLS = ["I", "V", "X", "L", "C", "D", "M"]
 
   def romanize(arabian)
-    return @romanizer_impl.romanize(arabian)
+    digits = to_digits(arabian)
+    ret = ''
+    digits.each_with_index{|digit, i|
+      place = digits.length - i
+      ret << to_roman(place, digit)
+    }
+    puts ret
+    return ret
+  end
+
+  def to_digits(arabian)
+    string = arabian.to_s
+    ret = []
+    for char in string.chars do
+      digit = char.to_i
+      ret << digit
+    end
+    return ret
+  end
+
+  def to_roman(place, digit)
+    unit_id = 2 * place - 2
+    unit = ROMAN_SYMBOLS[unit_id]
+    if digit <= 3
+      return unit * digit
+    end
+    base5 = ROMAN_SYMBOLS[unit_id + 1]
+    if digit == 4
+      return unit + base5
+    end
+    if digit <= 8
+      return base5 + unit * (digit - 5)
+    end
+    base10 = ROMAN_SYMBOLS[unit_id + 2]
+    if digit == 9
+      return unit + base10
+    end
   end
 
   def deromanize(roman)
-    return @deromanizer_impl.deromanize(roman)
+    for arabian in 1..3999 do
+      if roman == romanize(arabian)
+        return arabian
+      end
+    end
   end
 end
