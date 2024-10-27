@@ -19,7 +19,7 @@ class SgRomanizer
     end
   end
 
-  def to_digits(arabic)
+  private def to_digits(arabic)
     ret = []
     for char in arabic.to_s.chars do
       digit = char.to_i
@@ -28,7 +28,7 @@ class SgRomanizer
     return ret
   end
 
-  def to_roman(place, digit)
+  private def to_roman(place, digit)
     unit_index = 2 * place - 2
     unit = ROMAN_SYMBOLS[unit_index]
     if digit <= 3
