@@ -21,19 +21,19 @@ class SgRomanizer
   end
 
   def to_roman(place, digit)
-    unit_id = 2 * place - 2
-    unit = ROMAN_SYMBOLS[unit_id]
+    unit_index = 2 * place - 2
+    unit = ROMAN_SYMBOLS[unit_index]
     if digit <= 3
       return unit * digit
     end
-    base5 = ROMAN_SYMBOLS[unit_id + 1]
+    base5 = ROMAN_SYMBOLS[unit_index + 1]
     if digit == 4
       return unit + base5
     end
     if digit <= 8
       return base5 + unit * (digit - 5)
     end
-    base10 = ROMAN_SYMBOLS[unit_id + 2]
+    base10 = ROMAN_SYMBOLS[unit_index + 2]
     if digit == 9
       return unit + base10
     end
