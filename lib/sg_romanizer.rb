@@ -1,5 +1,6 @@
 class SgRomanizer
   ROMAN_SYMBOLS = ["I", "V", "X", "L", "C", "D", "M"]
+  MAX_ARABIC = 3999
 
   def romanize(arabic)
     ret = ''
@@ -12,7 +13,7 @@ class SgRomanizer
   end
 
   def deromanize(roman)
-    for arabic in 1..3999 do
+    for arabic in 1..MAX_ARABIC do
       if roman == romanize(arabic)
         return arabic
       end
